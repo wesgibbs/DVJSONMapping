@@ -30,6 +30,8 @@ enum {
   ISO8601DateFormatter *_iso8601DateFormatter;
 }
 
++ (NSArray *)mapJSON:(id)json context:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)errorPtr;
+
 + (NSArray *)mapJSON:(id)json expectingObject:(NSManagedObject *)expectingObject error:(NSError *__autoreleasing *)errorPtr;
 
 + (NSDictionary *)mapObject:(NSManagedObject *)object onlyChanges:(BOOL)onlyChanges error:(NSError **)errorPtr;

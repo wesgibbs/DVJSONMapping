@@ -35,9 +35,15 @@ static NSString * const kDefaultPrimaryKey = @"id";
 
 #pragma mark - Class methods
 
++ (NSArray *)mapJSON:(id)json context:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)errorPtr;
+{
+  DVJSONMapping *mapping = [[self alloc] initWithContext:context];
+  return [mapping mapJSON:json error:errorPtr];
+}
+
 + (NSArray *)mapJSON:(id)json expectingObject:(NSManagedObject *)expectingObject error:(NSError *__autoreleasing *)errorPtr;
 {
-  NSParameterAssert(expectingObject != nil);
+  NSParameterAssert(expectingObject);
 
   DVJSONMapping *mapping = [[self alloc] initWithContext:expectingObject.managedObjectContext];
   [mapping setExpectedObjectsFromJSON:@[ expectingObject ]];
