@@ -193,7 +193,8 @@
     }
 
     if ([jsonValue isKindOfClass:[NSDictionary class]] == NO) {
-      error = [self errorWithCode:DVJSONMappingErrorExpectedJSONDictionary];
+      NSObject *jsonObject = jsonValue;
+      error = [self errorWithCode:DVJSONMappingErrorExpectedJSONDictionaryForProperty_1_ButJSONWasOfClass_2_,relationship.name,NSStringFromClass(jsonObject.class)];
       if (errorPtr) {
         *errorPtr = error;
       }

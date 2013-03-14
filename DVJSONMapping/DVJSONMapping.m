@@ -334,6 +334,10 @@ static NSString * const kDefaultPrimaryKey = @"id";
       format = @"Property `%@` of class `%@` is not supported";
       break;
 
+    case DVJSONMappingErrorExpectedJSONDictionaryForProperty_1_ButJSONWasOfClass_2_:
+      format = @"Expected JSON to be a NSDictionary for property `%@`, but JSON was of class `%@`.";
+      break;
+
     default:
       break;
   }

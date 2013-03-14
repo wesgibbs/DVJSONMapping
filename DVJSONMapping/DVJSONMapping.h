@@ -18,6 +18,7 @@ enum {
   DVJSONMappingErrorNoPrimaryKeyForClass_1 = 5,
   DVJSONMappingErrorNoPrimaryKeyValueForClass_2 = 6,
   DVJSONMappingErrorBadPropertyType_2 = 7,
+  DVJSONMappingErrorExpectedJSONDictionaryForProperty_1_ButJSONWasOfClass_2_ = 8,
 };
 
 @protocol DVJSONMappingDelegate;
