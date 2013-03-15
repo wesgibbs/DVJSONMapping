@@ -541,7 +541,7 @@ static NSString * const kDefaultPrimaryKey = @"id";
   // resolve relationships
   //
 
-  [self resolveRelationshipsForObjectDictionary:objectDictionary];
+  [self resolveRelationshipsForObjectsByClassName:objectDictionary];
 
   //
   // return a flat array of objects
@@ -634,10 +634,10 @@ static NSString * const kDefaultPrimaryKey = @"id";
   return object;
 }
 
-- (void)resolveRelationshipsForObjectDictionary:(NSDictionary *)objectDictionary
+- (void)resolveRelationshipsForObjectsByClassName:(NSDictionary *)objectDictionary
 {
   if ([self.delegate respondsToSelector:@selector(JSONMapping:resolveRelationshipsForObjectsByClassName:)]) {
-    [self.delegate JSONMapping:self resolveRelationshipsForObjectDictionary:objectDictionary];
+    [self.delegate JSONMapping:self resolveRelationshipsForObjectsByClassName:objectDictionary];
   }
 }
 

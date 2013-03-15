@@ -75,7 +75,7 @@ enum {
 
 - (void)JSONMapping:(DVJSONMapping *)mapping didMapJSONObject:(NSDictionary *)jsonObject toObject:(id)object;
 
-- (void)JSONMapping:(DVJSONMapping *)mapping resolveRelationshipsForObjectDictionary:(NSDictionary *)objectDictionary;
+- (void)JSONMapping:(DVJSONMapping *)mapping resolveRelationshipsForObjectsByClassName:(NSDictionary *)objectDictionary;
 
 // before/after Object-to-JSON mapping
 
