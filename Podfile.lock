@@ -1,14 +1,14 @@
 
 PODS:
-- DVCoreDataFinders (0.2)
+- DVCoreDataFinders (0.3)
 - ISO8601DateFormatter (0.6)
 
 DEPENDENCIES:
-- DVCoreDataFinders (= 0.2)
+- DVCoreDataFinders (= 0.3)
 - ISO8601DateFormatter (= 0.6)
 
 SPEC CHECKSUMS:
-  DVCoreDataFinders: bbe2a5bda22999a3620cf69feee18e8f11dde5ef
+  DVCoreDataFinders: 73f7c261150ec8e1d88b17898c509f2f8c1c1f21
   ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
 
 COCOAPODS: 0.16.4
