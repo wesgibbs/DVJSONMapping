@@ -180,7 +180,7 @@
       return;
     }
 
-    [object setValue:resultSet forKey:relationship.name];
+    [self assignValue:resultSet toRelationship:relationship ofObject:object];
 
   }
   else { // to-one relationship
@@ -209,9 +209,56 @@
       return;
     }
 
-    [object setValue:resultObject forKey:relationship.name];
+    [self assignValue:resultObject toRelationship:relationship ofObject:object];
 
   }
+}
+
+- (void)assignValue:(id)newValue toRelationship:(NSRelationshipDescription *)relationship ofObject:(id)object;
+{
+  if ([self.delegate respondsToSelector:@selector(JSONMapping:willRemoveObjects:fromRelationship:ofObject:)]) {
+
+    // Determine which old values will be removed from the relationship and give the delegate
+    // a chance to keep them.
+
+    if (relationship.isToMany) {
+
+      NSSet *oldValues = (NSSet *)[object valueForKey:relationship.name];
+
+      NSMutableSet *removedObjects = [NSMutableSet setWithSet:oldValues];
+      if (newValue) {
+        [removedObjects minusSet:newValue];
+      }
+
+      if (removedObjects.count > 0) { // some objects would be removed
+
+        NSSet *keepObjects = [self.delegate JSONMapping:self willRemoveObjects:removedObjects fromRelationship:relationship ofObject:object];
+
+        NSMutableSet *updatedValues = [NSMutableSet setWithSet:newValue];
+        [updatedValues unionSet:keepObjects];
+
+        newValue = updatedValues;
+
+      }
+
+    }
+    else { // to-one relationship
+
+      id oldValue = [object valueForKey:relationship.name];
+
+      if (oldValue && newValue == nil) { // new value of nil would replace the old non-nil value
+        NSSet *removeObject = [NSSet setWithObject:oldValue];
+        NSSet *keepObject = [self.delegate JSONMapping:self willRemoveObjects:removeObject fromRelationship:relationship ofObject:object];
+        if (keepObject.count > 0) {
+          newValue = keepObject.anyObject;
+        }
+      }
+
+    }
+
+  }
+
+  [object setValue:newValue forKey:relationship.name];
 }
 
 #pragma mark - Object-to-JSON

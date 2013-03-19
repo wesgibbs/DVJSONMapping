@@ -93,4 +93,6 @@ enum {
 
 - (void)JSONMapping:(DVJSONMapping *)mapping updateObject:(id)object setJSONObject:(id)jsonObject forJSONKey:(NSString *)jsonKey;
 
+- (NSSet *)JSONMapping:(DVJSONMapping *)mapping willRemoveObjects:(NSSet *)objects fromRelationship:(NSRelationshipDescription *)relationship ofObject:(id)object;
+
 @end

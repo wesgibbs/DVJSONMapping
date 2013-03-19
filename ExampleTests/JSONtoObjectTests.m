@@ -3,11 +3,13 @@
 //  Copyright (c) 2013 Dynamic Variable LLC. All rights reserved.
 //
 
+#import <DVCoreDataFinders/DVCoreDataFinders.h>
 #import "JSONtoObjectTests.h"
 
 #import "DVAppDelegate.h"
 #import "DVJSONMapping.h"
 #import "JSONData.h"
+#import "MappingDelegate.h"
 #import "Place.h"
 #import "Trip.h"
 
@@ -181,6 +183,55 @@
     STAssertNotNil(place.id, nil);
     STAssertNotNil(place.name, nil); // place.name not affected by trip.name being excluded
   }];
+}
+
+#pragma mark - Test delegate methods
+
+- (Trip *)makeSanFranciscoTrip
+{
+  Trip *trip = [Trip insertIntoContext:context];
+  trip.name = @"San Francisco";
+  trip.duration = @10;
+  trip.isDraft = @YES;
+  trip.lastModified = [NSDate date];
+  trip.description_ = @"This is a description.";
+  return trip;
+}
+
+- (void)testWithoutDelegateWillRemoveObjectsFromRelationship
+{
+  Trip *trip = [self makeSanFranciscoTrip];
+  Place *place1 = [Place insertIntoContext:context];
+  place1.name = @"Golden Gate Bridge";
+  [trip addPlacesObject:place1];
+
+  DVJSONMapping *mapping = [[DVJSONMapping alloc] initWithContext:context];
+  [mapping setExpectedObjectsFromJSON:@[ trip ]];
+
+  NSDictionary *json = [JSONData newYorkCityTripJSON];
+  NSArray *objects = [mapping mapJSON:json error:nil];
+
+  STAssertTrue([objects containsObject:trip], nil);
+  STAssertFalse([trip.places containsObject:place1], nil);
+}
+
+- (void)testWithDelegateWillRemoveObjectsFromRelationship
+{
+  Trip *trip = [self makeSanFranciscoTrip];
+  Place *place1 = [Place insertIntoContext:context];
+  place1.name = @"Golden Gate Bridge";
+  [trip addPlacesObject:place1];
+
+  MappingDelegate *delegate = [[MappingDelegate alloc] init];
+  DVJSONMapping *mapping = [[DVJSONMapping alloc] initWithContext:context];
+  mapping.delegate = delegate;
+  [mapping setExpectedObjectsFromJSON:@[ trip ]];
+
+  NSDictionary *json = [JSONData newYorkCityTripJSON];
+  NSArray *objects = [mapping mapJSON:json error:nil];
+
+  STAssertTrue([objects containsObject:trip], nil);
+  STAssertTrue([trip.places containsObject:place1], nil);
 }
 
 @end

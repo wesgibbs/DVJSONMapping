@@ -34,6 +34,7 @@
 		70B688641693A90C00A452B3 /* DVJSONMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B688631693A90C00A452B3 /* DVJSONMapping.m */; };
 		70B688651693A90C00A452B3 /* DVJSONMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B688631693A90C00A452B3 /* DVJSONMapping.m */; };
 		70BE830116BAD4D80039A8C6 /* JSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BE830016BAD4D80039A8C6 /* JSONData.m */; };
+		70CE5F9C16F7E23000698557 /* MappingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CE5F9B16F7E23000698557 /* MappingDelegate.m */; };
 		70D5FA2916B5EEFB0029D39B /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D5FA2816B5EEFB0029D39B /* Place.m */; };
 		70D5FA2A16B5EEFB0029D39B /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D5FA2816B5EEFB0029D39B /* Place.m */; };
 		70D5FA2D16B5EEFB0029D39B /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D5FA2C16B5EEFB0029D39B /* Trip.m */; };
@@ -91,6 +92,8 @@
 		70B688631693A90C00A452B3 /* DVJSONMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DVJSONMapping.m; path = DVJSONMapping/DVJSONMapping.m; sourceTree = "<group>"; };
 		70BE82FF16BAD4D80039A8C6 /* JSONData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONData.h; sourceTree = "<group>"; };
 		70BE830016BAD4D80039A8C6 /* JSONData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONData.m; sourceTree = "<group>"; };
+		70CE5F9A16F7E23000698557 /* MappingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MappingDelegate.h; sourceTree = "<group>"; };
+		70CE5F9B16F7E23000698557 /* MappingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappingDelegate.m; sourceTree = "<group>"; };
 		70D5FA2716B5EEFB0029D39B /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
 		70D5FA2816B5EEFB0029D39B /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
 		70D5FA2B16B5EEFB0029D39B /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
@@ -207,6 +210,8 @@
 				70BE830016BAD4D80039A8C6 /* JSONData.m */,
 				70B68856169397A200A452B3 /* JSONtoObjectTests.h */,
 				70B68857169397A200A452B3 /* JSONtoObjectTests.m */,
+				70CE5F9A16F7E23000698557 /* MappingDelegate.h */,
+				70CE5F9B16F7E23000698557 /* MappingDelegate.m */,
 				7043FE2E16B0F30400C25178 /* Model */,
 				7002685516C4BC030029C28B /* ObjectToJSONTests.h */,
 				7002685616C4BC030029C28B /* ObjectToJSONTests.m */,
@@ -389,6 +394,7 @@
 				70D5FA2E16B5EEFB0029D39B /* Trip.m in Sources */,
 				70BE830116BAD4D80039A8C6 /* JSONData.m in Sources */,
 				7002685716C4BC030029C28B /* ObjectToJSONTests.m in Sources */,
+				70CE5F9C16F7E23000698557 /* MappingDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
