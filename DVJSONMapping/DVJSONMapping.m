@@ -354,6 +354,7 @@ static NSString * const kDefaultPrimaryKey = @"id";
 {
   if (_iso8601DateFormatter == nil) {
     _iso8601DateFormatter = [[ISO8601DateFormatter alloc] init];
+    _iso8601DateFormatter.includeTime = YES;
   }
   return _iso8601DateFormatter;
 }
