@@ -31,15 +31,15 @@ enum {
   ISO8601DateFormatter *_iso8601DateFormatter;
 }
 
+@property(nonatomic,strong,readonly) NSManagedObjectContext *context;
+@property(nonatomic,weak) id<DVJSONMappingDelegate> delegate;
+@property(nonatomic,strong) NSArray *mappableClasses; // array of NSStrings
+
 + (NSArray *)mapJSON:(id)json context:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)errorPtr;
 
 + (NSArray *)mapJSON:(id)json expectingObject:(NSManagedObject *)expectingObject error:(NSError *__autoreleasing *)errorPtr;
 
 + (NSDictionary *)mapObject:(NSManagedObject *)object onlyChanges:(BOOL)onlyChanges error:(NSError **)errorPtr;
-
-@property(nonatomic,strong,readonly) NSManagedObjectContext *context;
-@property(nonatomic,weak) id<DVJSONMappingDelegate> delegate;
-@property(nonatomic,strong) NSArray *mappableClasses; // array of NSStrings
 
 - (id)initWithContext:(NSManagedObjectContext *)context;
 
