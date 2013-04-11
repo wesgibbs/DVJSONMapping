@@ -521,12 +521,11 @@ static NSString * const kDefaultPrimaryKey = @"id";
       return;
     }
 
-    NSString *className = NSStringFromClass(aClass);
-    if ([objectDictionary objectForKey:className]) {
-      [objectDictionary[className] addObjectsFromArray:objects];
+    if ([objectDictionary objectForKey:jsonKey]) {
+      [objectDictionary[jsonKey] addObjectsFromArray:objects];
     }
     else {
-      objectDictionary[className] = [NSMutableArray arrayWithArray:objects];
+      objectDictionary[jsonKey] = [NSMutableArray arrayWithArray:objects];
     }
 
   }];
@@ -542,7 +541,7 @@ static NSString * const kDefaultPrimaryKey = @"id";
   // resolve relationships
   //
 
-  [self resolveRelationshipsForObjectsByClassName:objectDictionary];
+  [self resolveRelationshipsForObjectsByJSONKey:objectDictionary];
 
   //
   // return a flat array of objects
@@ -635,10 +634,10 @@ static NSString * const kDefaultPrimaryKey = @"id";
   return object;
 }
 
-- (void)resolveRelationshipsForObjectsByClassName:(NSDictionary *)objectDictionary
+- (void)resolveRelationshipsForObjectsByJSONKey:(NSDictionary *)objectDictionary
 {
-  if ([self.delegate respondsToSelector:@selector(JSONMapping:resolveRelationshipsForObjectsByClassName:)]) {
-    [self.delegate JSONMapping:self resolveRelationshipsForObjectsByClassName:objectDictionary];
+  if ([self.delegate respondsToSelector:@selector(JSONMapping:resolveRelationshipsForObjectsByJSONKey:)]) {
+    [self.delegate JSONMapping:self resolveRelationshipsForObjectsByJSONKey:objectDictionary];
   }
 }
 
