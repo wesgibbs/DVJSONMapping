@@ -15,4 +15,6 @@
 
 - (id)mapJSONObject:(NSDictionary *)aJSONObject ofClass:(Class)aClass error:(NSError **)errorPtr;
 
+- (void)addUnresolvedRelationhips:(NSSet *)unresolvedReferences named:(NSString *)relationshipName forObject:(id)object;
+
 @end

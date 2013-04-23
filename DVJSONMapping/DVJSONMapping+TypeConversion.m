@@ -151,6 +151,7 @@
   if (relationship.isToMany) {
 
     NSMutableSet *resultSet = [[NSMutableSet alloc] init];
+    NSMutableSet *referencesToObjects = [[NSMutableSet alloc] init];
 
     NSArray *jsonArray = [jsonValue isKindOfClass:[NSArray class]] ? (NSArray *)jsonValue : @[ jsonValue ];
 
@@ -158,18 +159,25 @@
 
     [jsonArray enumerateObjectsUsingBlock:^(id jsonObject, NSUInteger idx, BOOL *stop) {
 
-      if ([jsonObject isKindOfClass:[NSDictionary class]] == NO) {
+      if ([jsonObject isKindOfClass:[NSString class]]) {
+        // a reference to another object
+        [referencesToObjects addObject:jsonObject];
+      }
+      else if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+        // a dictionary representing the other object
+        id object = [self mapJSONObject:jsonObject ofClass:destinationClass error:&error];
+        if (object) {
+          [resultSet addObject:object];
+        }
+      }
+      else {
         error = [self errorWithCode:DVJSONMappingErrorExpectedJSONDictionary];
-        return;
       }
 
-      id object = [self mapJSONObject:jsonObject ofClass:destinationClass error:&error];
-      if (object == nil || error) {
+      if (error) {
         *stop = YES;
         return;
       }
-
-      [resultSet addObject:object];
 
     }];
 
@@ -180,7 +188,14 @@
       return;
     }
 
-    [self assignValue:resultSet toRelationship:relationship ofObject:object];
+    if (referencesToObjects.count == 0) {
+      // No references, so assign the result set (which can be empty)
+      [self assignValue:resultSet toRelationship:relationship ofObject:object];
+    }
+    else {
+      // Remember these references for later
+      [self addUnresolvedRelationhips:referencesToObjects named:relationship.name forObject:object];
+    }
 
   }
   else { // to-one relationship
@@ -189,27 +204,30 @@
 
     if ([jsonValue isKindOfClass:[NSNull class]]) {
       [object setValue:nil forKey:relationship.name];
-      return;
     }
-
-    if ([jsonValue isKindOfClass:[NSDictionary class]] == NO) {
+    else if ([jsonValue isKindOfClass:[NSString class]]) {
+      // a reference to another object
+      NSSet *referencesToObjects = [NSSet setWithObject:jsonValue];
+      [self addUnresolvedRelationhips:referencesToObjects named:relationship.name forObject:object];
+    }
+    else if ([jsonValue isKindOfClass:[NSDictionary class]]) {
+      // a dictionary representing the other object
+      id resultObject = [self mapJSONObject:jsonValue ofClass:destinationClass error:&error];
+      if (resultObject) {
+        [self assignValue:resultObject toRelationship:relationship ofObject:object];
+      }
+    }
+    else {
       NSObject *jsonObject = jsonValue;
       error = [self errorWithCode:DVJSONMappingErrorExpectedJSONDictionaryForProperty_1_ButJSONWasOfClass_2_,relationship.name,NSStringFromClass(jsonObject.class)];
+    }
+
+    if (error) {
       if (errorPtr) {
         *errorPtr = error;
       }
       return;
     }
-
-    id resultObject = [self mapJSONObject:jsonValue ofClass:destinationClass error:&error];
-    if (resultObject == nil || error) {
-      if (errorPtr) {
-        *errorPtr = error;
-      }
-      return;
-    }
-
-    [self assignValue:resultObject toRelationship:relationship ofObject:object];
 
   }
 }

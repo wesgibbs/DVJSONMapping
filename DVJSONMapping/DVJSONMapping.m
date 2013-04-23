@@ -28,6 +28,16 @@ static NSString * const kDefaultPrimaryKey = @"id";
 @property(nonatomic,strong) NSMutableDictionary *allowedAttributesToJSON;
 @property(nonatomic,strong) NSMutableDictionary *allowedRelationshipsToJSON;
 
+// `unresolvedReferences` is an NSArray of NSDictionarys. Each dictionary
+// has the key/value pairs:
+//
+//  relationships : an NSSet of NSStrings where each string is
+//                  a primary key of the target object
+//  named         : the relationship name on `object`
+//  object        : the source object
+//
+@property(nonatomic,strong) NSMutableArray *unresolvedReferences;
+
 @end
 
 
@@ -69,6 +79,7 @@ static NSString * const kDefaultPrimaryKey = @"id";
     self.context = context;
     self.mappableClasses = nil;
     self.mutableExpectedObjectsFromJSON = [[NSMutableArray alloc] init];
+    self.unresolvedReferences = [[NSMutableArray alloc] init];
   }
   return self;
 }
@@ -216,7 +227,7 @@ static NSString * const kDefaultPrimaryKey = @"id";
   }
 }
 
-#pragma mark - Methods
+#pragma mark - Class methods
 
 + (BOOL)isReservedPropertyName:(NSString *)name
 {
@@ -242,6 +253,15 @@ static NSString * const kDefaultPrimaryKey = @"id";
   });
 
   return [reservedNames containsObject:name];
+}
+
+#pragma mark - Methods
+
+- (void)addUnresolvedRelationhips:(NSSet *)relationships named:(NSString *)relationshipName forObject:(id)object
+{
+  NSDictionary *unresolvedReferences = @{ @"relationships" : relationships, @"named" : relationshipName, @"object": object };
+
+  [self.unresolvedReferences addObject:unresolvedReferences];
 }
 
 - (BOOL)canMapClass:(Class)aClass
@@ -541,7 +561,7 @@ static NSString * const kDefaultPrimaryKey = @"id";
   // resolve relationships
   //
 
-  [self resolveRelationshipsForObjectsByJSONKey:objectDictionary];
+  [self resolveRelationshipsForObjectsByJSONKey:objectDictionary unresolvedReferences:self.unresolvedReferences];
 
   //
   // return a flat array of objects
@@ -634,10 +654,10 @@ static NSString * const kDefaultPrimaryKey = @"id";
   return object;
 }
 
-- (void)resolveRelationshipsForObjectsByJSONKey:(NSDictionary *)objectDictionary
+- (void)resolveRelationshipsForObjectsByJSONKey:(NSDictionary *)objectDictionary unresolvedReferences:(NSArray *)unresolvedReferences
 {
-  if ([self.delegate respondsToSelector:@selector(JSONMapping:resolveRelationshipsForObjectsByJSONKey:)]) {
-    [self.delegate JSONMapping:self resolveRelationshipsForObjectsByJSONKey:objectDictionary];
+  if ([self.delegate respondsToSelector:@selector(JSONMapping:resolveRelationshipsForObjectsByJSONKey:unresolvedReferences:)]) {
+    [self.delegate JSONMapping:self resolveRelationshipsForObjectsByJSONKey:objectDictionary unresolvedReferences:unresolvedReferences];
   }
 }
 
