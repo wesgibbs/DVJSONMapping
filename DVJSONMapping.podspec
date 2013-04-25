@@ -11,5 +11,4 @@ Pod::Spec.new do |s|
   s.framework    = 'CoreData'
   s.requires_arc = true
   s.dependency 'DVCoreDataFinders', '~> 0.3'
-  s.dependency 'ISO8601DateFormatter', '0.6'
 end

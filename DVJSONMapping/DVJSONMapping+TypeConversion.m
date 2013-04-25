@@ -5,7 +5,6 @@
 
 #import "DVJSONMapping+Internal.h"
 #import "DVJSONMapping+TypeConversion.h"
-#import "ISO8601DateFormatter.h"
 #import "NSString+DVJSONMapping.h"
 
 @implementation DVJSONMapping (TypeConversion)

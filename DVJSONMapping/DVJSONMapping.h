@@ -22,13 +22,12 @@ enum {
 };
 
 @protocol DVJSONMappingDelegate;
-@class ISO8601DateFormatter;
 
 ////////////////////////////////////////////////////////////////////////
 
 @interface DVJSONMapping : NSObject
 {
-  ISO8601DateFormatter *_iso8601DateFormatter;
+  NSDateFormatter *_iso8601DateFormatter;
 }
 
 @property(nonatomic,strong,readonly) NSManagedObjectContext *context;

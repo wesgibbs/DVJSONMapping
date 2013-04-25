@@ -6,7 +6,6 @@
 #import <DVCoreDataFinders/DVCoreDataFinders.h>
 #import "DVJSONMapping.h"
 #import "DVJSONMapping+TypeConversion.h"
-#import "ISO8601DateFormatter.h"
 #import "NSString+DVJSONMapping.h"
 
 NSString * const DVJSONMappingErrorDomain = @"DVJSONMappingErrorDomain";
@@ -370,11 +369,12 @@ static NSString * const kDefaultPrimaryKey = @"id";
   return [NSError errorWithDomain:DVJSONMappingErrorDomain code:code userInfo:@{ NSLocalizedDescriptionKey: description }];
 }
 
-- (ISO8601DateFormatter *)iso8601DateFormatter
+- (NSDateFormatter *)iso8601DateFormatter
 {
   if (_iso8601DateFormatter == nil) {
-    _iso8601DateFormatter = [[ISO8601DateFormatter alloc] init];
-    _iso8601DateFormatter.includeTime = YES;
+    _iso8601DateFormatter = [[NSDateFormatter alloc] init];
+    _iso8601DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
+    _iso8601DateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
   }
   return _iso8601DateFormatter;
 }

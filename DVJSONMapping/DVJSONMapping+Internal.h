@@ -9,7 +9,7 @@
 
 - (NSError *)errorWithCode:(NSInteger)code,...;
 
-- (ISO8601DateFormatter *)iso8601DateFormatter;
+- (NSDateFormatter *)iso8601DateFormatter;
 
 - (void)logWarning:(NSString *)string;
 
