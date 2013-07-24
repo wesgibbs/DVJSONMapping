@@ -9,6 +9,7 @@
 static BOOL ShouldUppercaseWord(NSString *s)
 {
   static NSArray *words = nil;
+
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     words = @[ @"http", @"url" ];
