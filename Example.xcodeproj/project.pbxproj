@@ -12,7 +12,6 @@
 		7043FE2416B0E8A800C25178 /* StringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7043FE2316B0E8A800C25178 /* StringTests.m */; };
 		7043FE2D16B0F2FB00C25178 /* JournalEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7043FE2C16B0F2FB00C25178 /* JournalEntry.m */; };
 		7043FE7016B4991900C25178 /* DVJSONMapping+TypeConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 7043FE6F16B4991900C25178 /* DVJSONMapping+TypeConversion.m */; };
-		705DBED816E1912A00D282F4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 705DBED716E1912A00D282F4 /* libPods.a */; };
 		7099009416AFA1AC0010917C /* NSString+DVJSONMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 7099009316AFA1AC0010917C /* NSString+DVJSONMapping.m */; };
 		70B68827169397A200A452B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70B68826169397A200A452B3 /* UIKit.framework */; };
 		70B68829169397A200A452B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70B68828169397A200A452B3 /* Foundation.framework */; };
@@ -63,7 +62,6 @@
 		7043FE2C16B0F2FB00C25178 /* JournalEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalEntry.m; sourceTree = "<group>"; };
 		7043FE6E16B4991900C25178 /* DVJSONMapping+TypeConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DVJSONMapping+TypeConversion.h"; path = "DVJSONMapping/DVJSONMapping+TypeConversion.h"; sourceTree = "<group>"; };
 		7043FE6F16B4991900C25178 /* DVJSONMapping+TypeConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DVJSONMapping+TypeConversion.m"; path = "DVJSONMapping/DVJSONMapping+TypeConversion.m"; sourceTree = "<group>"; };
-		705DBED716E1912A00D282F4 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		7098FA5216D02BAB004DC0B5 /* DVJSONMapping+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DVJSONMapping+Internal.h"; path = "DVJSONMapping/DVJSONMapping+Internal.h"; sourceTree = "<group>"; };
 		7099009216AFA1AC0010917C /* NSString+DVJSONMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+DVJSONMapping.h"; path = "DVJSONMapping/NSString+DVJSONMapping.h"; sourceTree = "<group>"; };
 		7099009316AFA1AC0010917C /* NSString+DVJSONMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+DVJSONMapping.m"; path = "DVJSONMapping/NSString+DVJSONMapping.m"; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 				70B6884B169397A200A452B3 /* UIKit.framework in Frameworks */,
 				70B6884C169397A200A452B3 /* Foundation.framework in Frameworks */,
 				70B6884D169397A200A452B3 /* CoreData.framework in Frameworks */,
-				705DBED816E1912A00D282F4 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +138,6 @@
 		70B68817169397A200A452B3 = {
 			isa = PBXGroup;
 			children = (
-				705DBED716E1912A00D282F4 /* libPods.a */,
 				700A14EB16C82308007A8E71 /* README.md */,
 				70B688611693A8C200A452B3 /* DVJSONMapping */,
 				70B6882E169397A200A452B3 /* Example */,
