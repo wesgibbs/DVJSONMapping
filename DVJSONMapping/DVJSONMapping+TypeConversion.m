@@ -381,10 +381,12 @@
       if (errorPtr) {
         *errorPtr = [self errorWithCode:DVJSONMappingErrorBadAttributeType_1,attribute.name];
       }
-      break;
+      return;
   }
 
-  [json setObject:jsonValue forKey:jsonKey];
+  if (jsonValue) {
+    [json setObject:jsonValue forKey:jsonKey];
+  }
 }
 
 - (void)assignObjectValue:(id)objectValue ofRelationship:(NSRelationshipDescription *)relationship onlyChanges:(BOOL)onlyChanges toJSON:(NSMutableDictionary *)json error:(NSError **)errorPtr;

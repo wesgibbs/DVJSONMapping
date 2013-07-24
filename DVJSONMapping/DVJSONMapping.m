@@ -628,7 +628,9 @@ static NSString * const kDefaultPrimaryKey = @"id";
   }];
 
   if (error) {
-    *errorPtr = error;
+    if (errorPtr) {
+      *errorPtr = error;
+    }
     return nil;
   }
 
@@ -731,7 +733,9 @@ static NSString * const kDefaultPrimaryKey = @"id";
   }];
 
   if (error) {
-    *errorPtr = error;
+    if (errorPtr) {
+      *errorPtr = error;
+    }
     return;
   }
 
@@ -755,7 +759,9 @@ static NSString * const kDefaultPrimaryKey = @"id";
   }];
 
   if (error) {
-    *errorPtr = error;
+    if (errorPtr) {
+      *errorPtr = error;
+    }
     return;
   }
 
