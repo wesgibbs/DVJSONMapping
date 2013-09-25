@@ -373,6 +373,7 @@ static NSString * const kDefaultPrimaryKey = @"id";
 {
   if (_iso8601DateFormatter == nil) {
     _iso8601DateFormatter = [[NSDateFormatter alloc] init];
+    _iso8601DateFormatter.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     _iso8601DateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
     _iso8601DateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
   }
