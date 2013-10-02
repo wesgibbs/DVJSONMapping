@@ -365,8 +365,11 @@
     case NSDoubleAttributeType:
     case NSFloatAttributeType:
     case NSStringAttributeType:
-    case NSBooleanAttributeType:
       jsonValue = value;
+      break;
+
+    case NSBooleanAttributeType:
+      jsonValue = ([value isEqualToNumber:@(0)]) ? @"false" : @"true";
       break;
 
     case NSDateAttributeType:

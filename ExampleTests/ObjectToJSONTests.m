@@ -76,7 +76,7 @@
 
   STAssertEqualObjects(json[@"description"], @"This is a description.", nil);
   STAssertEqualObjects(json[@"duration"], @10, nil);
-  STAssertEqualObjects(json[@"is_draft"], @YES, nil);
+  STAssertEqualObjects(json[@"is_draft"], @"true", nil);
   STAssertEqualObjects(json[@"name"], @"San Francisco", nil);
   STAssertNotNil(json[@"last_modified"], nil);
   STAssertNil(json[@"places"], nil);
@@ -96,9 +96,25 @@
 
   STAssertEqualObjects(json[@"description"], @"This is a description.", nil);
   STAssertEqualObjects(json[@"duration"], @10, nil);
-  STAssertEqualObjects(json[@"is_draft"], @YES, nil);
+  STAssertEqualObjects(json[@"is_draft"], @"true", nil);
   STAssertEqualObjects(json[@"name"], @"San Francisco", nil);
   STAssertNotNil(json[@"last_modified"], nil);
+}
+
+- (void)testMappingToJSONBooleanValues
+{
+  NSError *error;
+
+  Trip *trip = [self simpleTrip];
+  trip.isDraft = @YES;
+  NSDictionary *json = [DVJSONMapping mapObject:trip onlyChanges:NO error:&error];
+
+  STAssertEqualObjects(json[@"is_draft"], @"true", nil);
+
+  trip.isDraft = @NO;
+  json = [DVJSONMapping mapObject:trip onlyChanges:NO error:&error];
+
+  STAssertEqualObjects(json[@"is_draft"], @"false", nil);
 }
 
 @end
